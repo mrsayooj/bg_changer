@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Background Changer</title>
+  <title>Slow Background Color Change</title>
   <style>
     /* Ensure the body fills the entire screen */
     body {
@@ -11,26 +11,28 @@
       padding: 0;
       height: 100vh;
       width: 100%;
-      background-color: #A5DEA5; /* Initial background color */
-      transition: background-color 5s ease; /* Transition over 15 seconds */
+      overflow: hidden;
+      /*background-color: #A5DEA5; /* Initial background color */
+      position: relative;
+      cursor: default; /* Set default cursor */
+      transition: background-color 5s ease; /* Smooth transition for background color change */
     }
+
   </style>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const colors = ["#A5DEA5", "#FFD6DD", "#D6E1FF"];
+      const colors = ["#A5DEA5", "#FFD6DD", "#D6E1FF"]; // Soft pastel colors
       let currentIndex = 0;
 
+      // Function to change the background color slowly
       function changeBackground() {
-        // Change the background color with smooth transition
         document.body.style.backgroundColor = colors[currentIndex];
         currentIndex = (currentIndex + 1) % colors.length;
       }
 
-      // Call the function to set the initial color and start the transition
-      changeBackground();
-
-      // Set an interval to change the background color every 15 seconds
-      setInterval(changeBackground, 5000); // Change every 15 seconds to match the transition duration
+      // Change background color every 10 seconds (slow transition)
+      setInterval(changeBackground, 5000);
+      changeBackground(); // Set the initial color
     });
   </script>
 </head>
