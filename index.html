@@ -6,15 +6,16 @@
   <title>Background Changer</title>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const colors = ["#A5DEA5", "#FFD6DD", "#D6E1FF"];
-      let currentIndex = 0;
+     const colors = ["#A5DEA5", "#FFD6DD", "#D6E1FF"];
+let index = 0;
 
-      function changeBackground() {
-        document.body.style.backgroundColor = colors[currentIndex];
-        currentIndex = (currentIndex + 1) % colors.length;
-      }
+function changeBackground() {
+  document.body.style.backgroundColor = colors[index];
+  index = (index + 1) % colors.length; // Loop back to the first color
+}
 
-      setInterval(changeBackground, 5000);
+setInterval(changeBackground, 5000);
+
       changeBackground(); // Set the initial color
     });
   </script>
