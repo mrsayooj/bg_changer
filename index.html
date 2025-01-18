@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Invisible Cursor with Soft Pastel Gradient</title>
+  <title>Background Changer</title>
   <style>
     /* Ensure the body fills the entire screen */
     body {
@@ -11,64 +11,32 @@
       padding: 0;
       height: 100vh;
       width: 100%;
-      overflow: hidden;
       background-color: #A5DEA5; /* Initial background color */
-      position: relative;
-      cursor: none; /* Hide the default cursor */
-    }
-
-    /* Style for the gradient that follows the mouse */
-    .gradient-effect {
-      position: absolute;
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-      animation: float 2s infinite; /* Slow transition for the effect */
-    }
-
-    /* Keyframe animation for the floating effect */
-    @keyframes float {
-      0% {
-        transform: scale(0.8);
-        opacity: 0.8;
-      }
-      50% {
-        transform: scale(1.2);
-        opacity: 0.4;
-      }
-      100% {
-        transform: scale(0.8);
-        opacity: 0.8;
-      }
+      transition: background-color 15s ease; /* Transition over 15 seconds */
     }
   </style>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const gradientEffect = document.createElement('div');
-      gradientEffect.classList.add('gradient-effect');
-      document.body.appendChild(gradientEffect);
+      const colors = ["#A5DEA5", "#FFD6DD", "#D6E1FF"];
+      let currentIndex = 0;
 
-      // Function to update the position of the gradient effect
-      document.addEventListener('mousemove', (e) => {
-        const mouseX = e.clientX;
-        const mouseY = e.clientY;
+      function changeBackground() {
+        // Change the background color with smooth transition
+        document.body.style.backgroundColor = colors[currentIndex];
+        currentIndex = (currentIndex + 1) % colors.length;
+      }
 
-        // Update the position of the gradient effect
-        gradientEffect.style.left = `${mouseX}px`;
-        gradientEffect.style.top = `${mouseY}px`;
+      // Call the function to set the initial color and start the transition
+      changeBackground();
 
-        // Optionally, add a slow fade and transition effect
-        gradientEffect.style.transition = 'all 1s ease-in-out';
-      });
+      // Set an interval to change the background color every 15 seconds
+      setInterval(changeBackground, 15000); // Change every 15 seconds to match the transition duration
     });
   </script>
 </head>
 <body>
 </body>
 </html>
+
 
 
