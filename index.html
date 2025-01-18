@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Background Changer</title>
+  <style>
+    body {
+      background-color: #A5DEA5; /* Make sure to set an initial background color */
+    }
+  </style>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const colors = ["#A5DEA5", "#FFD6DD", "#D6E1FF"];
@@ -14,8 +19,8 @@
         currentIndex = (currentIndex + 1) % colors.length;
       }
 
-      setInterval(changeBackground, 10000);
       changeBackground(); // Set the initial color
+      setInterval(changeBackground, 3000); // Start cycling the background color
     });
   </script>
 </head>
