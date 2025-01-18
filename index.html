@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Floating Mouse Cursor Effect</title>
+  <title>Floating Cursor Effect</title>
   <style>
     /* Ensure the body fills the entire screen */
     body {
@@ -11,8 +11,8 @@
       padding: 0;
       height: 100vh;
       width: 100%;
-      background-color: #A5DEA5; /* Initial background color */
       overflow: hidden; /* Hide overflowing elements */
+      background-color: #A5DEA5; /* Initial background color */
       position: relative;
     }
 
@@ -22,12 +22,25 @@
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      background: rgba(0, 0, 0, 0.2); /* Subtle dark background */
+      background: rgba(0, 0, 0, 0.2); /* Dark background */
       pointer-events: none;
-      transform: translate(-50%, -50%); /* Center it on the cursor position */
-      transition: width 0.2s, height 0.2s, background-color 0.2s;
+      transition: width 0.4s, height 0.4s, background-color 0.4s;
       mix-blend-mode: difference;
       z-index: 9999;
+      transform: translate(-50%, -50%);
+      animation: ripple 1s infinite; /* Animation for ripple effect */
+    }
+
+    /* Keyframe animation for ripple effect */
+    @keyframes ripple {
+      0% {
+        transform: scale(0);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(3);
+        opacity: 0;
+      }
     }
   </style>
   <script>
@@ -55,7 +68,7 @@
           cursor.style.width = '40px';  // Restore original size
           cursor.style.height = '40px';
           cursor.style.background = 'rgba(0, 0, 0, 0.2)';
-        }, 150);
+        }, 400); // This matches the transition time
       });
     });
   </script>
