@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ripple Effect</title>
+  <title>Floating Mouse Cursor Effect</title>
   <style>
     /* Ensure the body fills the entire screen */
     body {
@@ -11,61 +11,52 @@
       padding: 0;
       height: 100vh;
       width: 100%;
-      overflow: hidden; /* Hide overflowing elements */
       background-color: #A5DEA5; /* Initial background color */
+      overflow: hidden; /* Hide overflowing elements */
       position: relative;
-      transition: background-color 15s ease; /* Smooth color change */
     }
 
-    /* Style the ripple effect */
-    .ripple {
+    /* Style the custom cursor */
+    .cursor {
       position: absolute;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
-      background: rgba(0, 0, 0, 0.2); /* Subtle dark color for ripple */
+      background: rgba(0, 0, 0, 0.2); /* Subtle dark background */
       pointer-events: none;
-      animation: ripple-animation 1.5s ease-out;
-    }
-
-    /* Animation for the ripple effect */
-    @keyframes ripple-animation {
-      to {
-        transform: scale(4);
-        opacity: 0;
-      }
+      transform: translate(-50%, -50%); /* Center it on the cursor position */
+      transition: width 0.2s, height 0.2s, background-color 0.2s;
+      mix-blend-mode: difference;
+      z-index: 9999;
     }
   </style>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      // Function to create the ripple effect
-      function createRipple(event) {
-        // Get mouse position
-        const mouseX = event.clientX;
-        const mouseY = event.clientY;
+      const cursor = document.createElement('div');
+      cursor.classList.add('cursor');
+      document.body.appendChild(cursor);
 
-        // Create a new div for the ripple
-        const ripple = document.createElement('div');
-        ripple.classList.add('ripple');
+      // Function to update the position of the custom cursor
+      document.addEventListener('mousemove', (e) => {
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
 
-        // Append it to the body
-        document.body.appendChild(ripple);
+        // Move the custom cursor to the mouse position
+        cursor.style.left = `${mouseX}px`;
+        cursor.style.top = `${mouseY}px`;
 
-        // Set the size of the ripple based on the viewport
-        const size = Math.max(window.innerWidth, window.innerHeight);
-        ripple.style.width = `${size}px`;
-        ripple.style.height = `${size}px`;
+        // Add a floating effect by increasing the size and changing color
+        cursor.style.width = '80px';  // Make the cursor grow
+        cursor.style.height = '80px';
+        cursor.style.background = `radial-gradient(circle, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.2))`;
 
-        // Position the ripple at the mouse coordinates
-        ripple.style.left = `${mouseX - size / 2}px`;
-        ripple.style.top = `${mouseY - size / 2}px`;
-
-        // Remove the ripple after the animation ends
-        ripple.addEventListener('animationend', () => {
-          ripple.remove();
-        });
-      }
-
-      // Add mousemove event listener to trigger ripple
-      document.body.addEventListener('mousemove', createRipple);
+        // Reset the cursor size after the animation completes
+        setTimeout(() => {
+          cursor.style.width = '40px';  // Restore original size
+          cursor.style.height = '40px';
+          cursor.style.background = 'rgba(0, 0, 0, 0.2)';
+        }, 150);
+      });
     });
   </script>
 </head>
