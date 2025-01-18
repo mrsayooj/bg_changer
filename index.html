@@ -5,31 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Background Changer</title>
   <style>
+    /* Ensure the body fills the entire screen */
     body {
-      /*background-color: #A5DEA5; /* Initial color */
-      transition: background-color 5s ease; /* Slow 10s transition */
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      width: 100%;
+      /*background-color: #A5DEA5; /* Initial background color */
+      transition: background-color 5s ease; /* Transition over 15 seconds */
     }
   </style>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const colors = ["#A5DEA5", "#DEA5A6", "#A5CFDE"];
+      const colors = ["#A5DEA5", "#FFD6DD", "#D6E1FF"];
       let currentIndex = 0;
 
       function changeBackground() {
+        // Change the background color with smooth transition
         document.body.style.backgroundColor = colors[currentIndex];
         currentIndex = (currentIndex + 1) % colors.length;
       }
 
-      // Set initial color
+      // Call the function to set the initial color and start the transition
       changeBackground();
-      // Cycle the background colors every 15 seconds, which ensures each transition is visible
-      setInterval(changeBackground, 10000); // Slow change, every 15 seconds
+
+      // Set an interval to change the background color every 15 seconds
+      setInterval(changeBackground, 5000); // Change every 15 seconds to match the transition duration
     });
   </script>
 </head>
 <body>
 </body>
-</html>
-
 </html>
 
