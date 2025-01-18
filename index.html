@@ -6,8 +6,8 @@
   <title>Background Changer</title>
   <style>
     body {
-      background-color: #A5DEA5; /* Initial background color */
-      transition: background-color 5s ease; /* Transition over 5 seconds */
+      /*background-color: #A5DEA5; /* Initial color */
+      transition: background-color 10s ease; /* Slow 10s transition */
     }
   </style>
   <script>
@@ -20,12 +20,16 @@
         currentIndex = (currentIndex + 1) % colors.length;
       }
 
-      changeBackground(); // Set the initial color
-      setInterval(changeBackground, 10000); // Change every 10 seconds
+      // Set initial color
+      changeBackground();
+      // Cycle the background colors every 15 seconds, which ensures each transition is visible
+      setInterval(changeBackground, 15000); // Slow change, every 15 seconds
     });
   </script>
 </head>
 <body>
 </body>
+</html>
+
 </html>
 
