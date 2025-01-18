@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Invisible Comet Cursor</title>
+  <title>Invisible Cursor with Soft Pastel Gradient</title>
   <style>
     /* Ensure the body fills the entire screen */
     body {
@@ -11,66 +11,64 @@
       padding: 0;
       height: 100vh;
       width: 100%;
-      background-color: #A5DEA5; /* Initial background color */
       overflow: hidden;
-      cursor: none; /* Hide the default cursor */
+      background-color: #A5DEA5; /* Initial background color */
       position: relative;
+      cursor: none; /* Hide the default cursor */
     }
 
-    /* Style for comet trail */
-    .comet {
+    /* Style for the gradient that follows the mouse */
+    .gradient-effect {
       position: absolute;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.8); /* Subtle comet trail */
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
       pointer-events: none;
-      animation: comet-trail 1s forwards;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      animation: float 2s infinite; /* Slow transition for the effect */
     }
 
-    /* Keyframes for comet trail animation */
-    @keyframes comet-trail {
+    /* Keyframe animation for the floating effect */
+    @keyframes float {
       0% {
-        transform: scale(1);
-        opacity: 1;
+        transform: scale(0.8);
+        opacity: 0.8;
+      }
+      50% {
+        transform: scale(1.2);
+        opacity: 0.4;
       }
       100% {
-        transform: scale(0);
-        opacity: 0;
+        transform: scale(0.8);
+        opacity: 0.8;
       }
     }
   </style>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      let cometSize = 20; // Set comet size (radius)
+      const gradientEffect = document.createElement('div');
+      gradientEffect.classList.add('gradient-effect');
+      document.body.appendChild(gradientEffect);
 
-      // Function to create the comet effect
-      function createComet(e) {
-        // Create a new comet trail element
-        const comet = document.createElement('div');
-        comet.classList.add('comet');
-        
-        // Set the size of the comet trail
-        comet.style.width = `${cometSize}px`;
-        comet.style.height = `${cometSize}px`;
+      // Function to update the position of the gradient effect
+      document.addEventListener('mousemove', (e) => {
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
 
-        // Position the comet trail at the mouse location
-        comet.style.left = `${e.clientX - cometSize / 2}px`;
-        comet.style.top = `${e.clientY - cometSize / 2}px`;
+        // Update the position of the gradient effect
+        gradientEffect.style.left = `${mouseX}px`;
+        gradientEffect.style.top = `${mouseY}px`;
 
-        // Append the comet trail to the body
-        document.body.appendChild(comet);
-
-        // Remove the comet trail after animation ends
-        comet.addEventListener('animationend', () => {
-          comet.remove();
-        });
-      }
-
-      // Add mousemove event to create comet trail
-      document.body.addEventListener('mousemove', createComet);
+        // Optionally, add a slow fade and transition effect
+        gradientEffect.style.transition = 'all 1s ease-in-out';
+      });
     });
   </script>
 </head>
 <body>
 </body>
 </html>
+
 
