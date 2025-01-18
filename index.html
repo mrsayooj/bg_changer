@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Background Changer</title>
+  <title>Ripple Effect</title>
   <style>
     /* Ensure the body fills the entire screen */
     body {
@@ -11,30 +11,64 @@
       padding: 0;
       height: 100vh;
       width: 100%;
-      /*background-color: #A5DEA5; /* Initial background color */
-      transition: background-color 5s ease; /* Transition over 15 seconds */
+      overflow: hidden; /* Hide overflowing elements */
+      background-color: #A5DEA5; /* Initial background color */
+      position: relative;
+      transition: background-color 15s ease; /* Smooth color change */
+    }
+
+    /* Style the ripple effect */
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.2); /* Subtle dark color for ripple */
+      pointer-events: none;
+      animation: ripple-animation 1.5s ease-out;
+    }
+
+    /* Animation for the ripple effect */
+    @keyframes ripple-animation {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
     }
   </style>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const colors = ["#A5DEA5", "#FFD6DD", "#D6E1FF"];
-      let currentIndex = 0;
+      // Function to create the ripple effect
+      function createRipple(event) {
+        // Get mouse position
+        const mouseX = event.clientX;
+        const mouseY = event.clientY;
 
-      function changeBackground() {
-        // Change the background color with smooth transition
-        document.body.style.backgroundColor = colors[currentIndex];
-        currentIndex = (currentIndex + 1) % colors.length;
+        // Create a new div for the ripple
+        const ripple = document.createElement('div');
+        ripple.classList.add('ripple');
+
+        // Append it to the body
+        document.body.appendChild(ripple);
+
+        // Set the size of the ripple based on the viewport
+        const size = Math.max(window.innerWidth, window.innerHeight);
+        ripple.style.width = `${size}px`;
+        ripple.style.height = `${size}px`;
+
+        // Position the ripple at the mouse coordinates
+        ripple.style.left = `${mouseX - size / 2}px`;
+        ripple.style.top = `${mouseY - size / 2}px`;
+
+        // Remove the ripple after the animation ends
+        ripple.addEventListener('animationend', () => {
+          ripple.remove();
+        });
       }
 
-      // Call the function to set the initial color and start the transition
-      changeBackground();
-
-      // Set an interval to change the background color every 15 seconds
-      setInterval(changeBackground, 5000); // Change every 15 seconds to match the transition duration
+      // Add mousemove event listener to trigger ripple
+      document.body.addEventListener('mousemove', createRipple);
     });
   </script>
 </head>
 <body>
 </body>
 </html>
-
